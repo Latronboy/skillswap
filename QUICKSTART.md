@@ -22,7 +22,7 @@ If any are missing, install them first!
 
 ### 1. Clone & Navigate
 ```bash
-git clone https://github.com/yourusername/skillswap.git
+git clone https://github.com/Latronboy/skillswap.git
 cd skillswap
 ```
 

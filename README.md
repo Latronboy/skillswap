@@ -51,7 +51,7 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/skillswap.git
+git clone https://github.com/Latronboy/skillswap.git
 cd skillswap
 ```
 
@@ -367,7 +367,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/yourusername)
+- **Latronboy** - *Initial work* - [Latronboy](https://github.com/Latronboy)
 
 ## 🙏 Acknowledgments
 
