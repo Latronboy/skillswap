@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Skills - SkillSwap</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        accent: '#ec4899',
+                        dark: '#0f172a',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+        .skill-tag {
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+        .nav-link:hover {
+            color: #8b5cf6;
+        }
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover {
+            background-color: #e2e8f0;
+        }
+        .filter-btn.active {
+            background-color: #6366f1;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
+                    <i data-feather="repeat" class="text-white"></i>
+                </div>
+                <span class="text-2xl font-bold text-dark">Skill<span class="text-primary">Swap</span></span>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="nav-link font-medium text-dark">Home</a>
+                <a href="#" class="nav-link font-medium text-primary">Browse Skills</a>
+                <a href="#" class="nav-link font-medium text-dark">How It Works</a>
+                <a href="#" class="nav-link font-medium text-dark">Community</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button class="hidden md:block bg-primary hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-full transition duration-300">
+                    Sign In
+                </button>
+                <button class="hidden md:block bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium py-2 px-6 rounded-full transition duration-300">
+                    Join Free
+                </button>
+                <button class="md:hidden text-dark">
+                    <i data-feather="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Browse Skills Header -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-dark mb-2">Browse Skills</h1>
+                    <p class="text-gray-600">Find skills to learn or offer your expertise</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <button class="bg-primary hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-full transition duration-300 flex items-center">
+                        <i data-feather="plus" class="mr-2"></i> Add Your Skill
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Search and Filters -->
+            <div class="bg-light rounded-2xl p-6 mb-8">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-grow">
+                        <div class="relative">
+                            <i data-feather="search" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                            <input type="text" placeholder="Search skills, categories, or users..." class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <select class="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option>All Categories</option>
+                            <option>Technology</option>
+                            <option>Languages</option>
+                            <option>Business</option>
+                            <option>Arts & Crafts</option>
+                        </select>
+                        <select class="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option>Sort By</option>
+                            <option>Most Popular</option>
+                            <option>Newest</option>
+                            <option>Alphabetical</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex flex-wrap gap-2">
+                    <button class="filter-btn px-4 py-2 rounded-full bg-white border border-gray-300 text-gray-700">All</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-white border border-gray-300 text-gray-700">Technology</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-white border border-gray-300 text-gray-700">Languages</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-white border border-gray-300 text-gray-700">Business</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-white border border-gray-300 text-gray-700">Creative</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-white border border-gray-300 text-gray-700">Lifestyle</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Grid -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Skill Card 1 -->
+                <div class="skill-card bg-white rounded-2xl overflow-hidden shadow-md">
+                    <div class="h-40 bg-gradient-to-r from-indigo-500 to-purple-600 relative">
+                        <div class="absolute top-4 right-4 bg-white text-primary font-bold text-sm px-3 py-1 rounded-full">
+                            NEW
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-lg text-dark">Web Development</h3>
+                                <p class="text-gray-500 text-sm">Frontend & Backend</p>
+                            </div>
+                            <div class="bg-indigo-100 text-primary text-xs font-bold px-2 py-1 rounded">
+                                120+ users
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag bg-indigo-50 text-indigo-700 text-xs font-medium px-2 py-1 rounded">React</span>
+                            <span class="skill-tag bg-purple-50 text-purple-700 text-xs font-medium px-2 py-1 rounded">Node.js</span>
+                            <span class="skill-tag bg-pink-50 text-pink-700 text-xs font-medium px-2 py-1 rounded">MongoDB</span>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="http://static.photos/people/320x240/2" alt="User" class="w-8 h-8 rounded-full">
+                            <span class="text-gray-600 text-sm ml-2">Offered by 42 users</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skill Card 2 -->
+                <div class="skill-card bg-white rounded-2xl overflow-hidden shadow-md">
+                    <div class="h-40 bg-gradient-to-r from-green-500 to-teal-600"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-lg text-dark">Digital Marketing</h3>
+                                <p class="text-gray-500 text-sm">SEO & Social Media</p>
+                            </div>
+                            <div class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">
+                                95+ users
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag bg-green-50 text-green-700 text-xs font-medium px-2 py-1 rounded">SEO</span>
+                            <span class="skill-tag bg-teal-50 text-teal-700 text-xs font-medium px-2 py-1 rounded">Content</span>
+                            <span class="skill-tag bg-cyan-50 text-cyan-700 text-xs font-medium px-2 py-1 rounded">Analytics</span>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="http://static.photos/people/320x240/3" alt="User" class="w-8 h-8 rounded-full">
+                            <span class="text-gray-600 text-sm ml-2">Offered by 28 users</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skill Card 3 -->
+                <div class="skill-card bg-white rounded-2xl overflow-hidden shadow-md">
+                    <div class="h-40 bg-gradient-to-r from-amber-500 to-orange-600"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-lg text-dark">Language Learning</h3>
+                                <p class="text-gray-500 text-sm">Spanish, French, Mandarin</p>
+                            </div>
+                            <div class="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-1 rounded">
+                                210+ users
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag bg-amber-50 text-amber-700 text-xs font-medium px-2 py-1 rounded">Spanish</span>
+                            <span class="skill-tag bg-orange-50 text-orange-700 text-xs font-medium px-2 py-1 rounded">French</span>
+                            <span class="skill-tag bg-yellow-50 text-yellow-700 text-xs font-medium px-2 py-1 rounded">Mandarin</span>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="http://static.photos/people/320x240/4" alt="User" class="w-8 h-8 rounded-full">
+                            <span class="text-gray-600 text-sm ml-2">Offered by 76 users</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skill Card 4 -->
+                <div class="skill-card bg-white rounded-2xl overflow-hidden shadow-md">
+                    <div class="h-40 bg-gradient-to-r from-rose-500 to-pink-600"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-lg text-dark">Photography</h3>
+                                <p class="text-gray-500 text-sm">Portrait & Landscape</p>
+                            </div>
+                            <div class="bg-rose-100 text-rose-700 text-xs font-bold px-2 py-1 rounded">
+                                85+ users
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag bg-rose-50 text-rose-700 text-xs font-medium px-2 py-1 rounded">Portrait</span>
+                            <span class="skill-tag bg-pink-50 text-pink-700 text-xs font-medium px-2 py-1 rounded">Lighting</span>
+                            <span class="skill-tag bg-fuchsia-50 text-fuchsia-700 text-xs font-medium px-2 py-1 rounded">Editing</span>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="http://static.photos/people/320x240/5" alt="User" class="w-8 h-8 rounded-full">
+                            <span class="text-gray-600 text-sm ml-2">Offered by 34 users</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skill Card 5 -->
+                <div class="skill-card bg-white rounded-2xl overflow-hidden shadow-md">
+                    <div class="h-40 bg-gradient-to-r from-cyan-500 to-blue-600"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-lg text-dark">Data Science</h3>
+                                <p class="text-gray-500 text-sm">Python & Machine Learning</p>
+                            </div>
+                            <div class="bg-cyan-100 text-cyan-700 text-xs font-bold px-2 py-1 rounded">
+                                75+ users
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag bg-cyan-50 text-cyan-700 text-xs font-medium px-2 py-1 rounded">Python</span>
+                            <span class="skill-tag bg-blue-50 text-blue-700 text-xs font-medium px-2 py-1 rounded">Pandas</span>
+                            <span class="skill-tag bg-indigo-50 text-indigo-700 text-xs font-medium px-2 py-1 rounded">ML</span>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="http://static.photos/people/320x240/9" alt="User" class="w-8 h-8 rounded-full">
+                            <span class="text-gray-600 text-sm ml-2">Offered by 29 users</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skill Card 6 -->
+                <div class="skill-card bg-white rounded-2xl overflow-hidden shadow-md">
+                    <div class="h-40 bg-gradient-to-r from-emerald-500 to-green-600"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-lg text-dark">Cooking</h3>
+                                <p class="text-gray-500 text-sm">Italian & Asian Cuisine</p>
+                            </div>
+                            <div class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded">
+                                130+ users
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag bg-emerald-50 text-emerald-700 text-xs font-medium px-2 py-1 rounded">Italian</span>
+                            <span class="skill-tag bg-green-50 text-green-700 text-xs font-medium px-2 py-1 rounded">Asian</span>
+                            <span class="skill-tag bg-lime-50 text-lime-700 text-xs font-medium px-2 py-1 rounded">Baking</span>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="http://static.photos/people/320x240/10" alt="User" class="w-8 h-8 rounded-full">
+                            <span class="text-gray-600 text-sm ml-2">Offered by 52 users</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skill Card 7 -->
+                <div class="skill-card bg-white rounded-2xl overflow-hidden shadow-md">
+                    <div class="h-40 bg-gradient-to-r from-violet-500 to-purple-600"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-lg text-dark">Music</h3>
+                                <p class="text-gray-500 text-sm">Guitar & Piano</p>
+                            </div>
+                            <div class="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-1 rounded">
+                                90+ users
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag bg-violet-50 text-violet-700 text-xs font-medium px-2 py-1 rounded">Guitar</span>
+                            <span class="skill-tag bg-purple-50 text-purple-700 text-xs font-medium px-2 py-1 rounded">Piano</span>
+                            <span class="skill-tag bg-fuchsia-50 text-fuchsia-700 text-xs font-medium px-2 py-1 rounded">Composition</span>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="http://static.photos/people/320x240/11" alt="User" class="w-8 h-8 rounded-full">
+                            <span class="text-gray-600 text-sm ml-2">Offered by 37 users</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skill Card 8 -->
+                <div class="skill-card bg-white rounded-2xl overflow-hidden shadow-md">
+                    <div class="h-40 bg-gradient-to-r from-rose-500 to-pink-600"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-lg text-dark">Fitness Training</h3>
+                                <p class="text-gray-500 text-sm">Yoga & Weight Training</p>
+                            </div>
+                            <div class="bg-rose-100 text-rose-700 text-xs font-bold px-2 py-1 rounded">
+                                65+ users
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag bg-rose-50 text-rose-700 text-xs font-medium px-2 py-1 rounded">Yoga</span>
+                            <span class="skill-tag bg-pink-50 text-pink-700 text-xs font-medium px-2 py-1 rounded">Weight</span>
+                            <span class="skill-tag bg-fuchsia-50 text-fuchsia-700 text-xs font-medium px-2 py-1 rounded">Nutrition</span>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="http://static.photos/people/320x240/12" alt="User" class="w-8 h-8 rounded-full">
+                            <span class="text-gray-600 text-sm ml-2">Offered by 24 users</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="flex justify-center mt-12">
+                <nav class="flex items-center space-x-2">
+                    <a href="#" class="px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">
+                        <i data-feather="chevron-left" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="px-4 py-2 rounded-lg bg-primary text-white">1</a>
+                    <a href="#" class="px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">2</a>
+                    <a href="#" class="px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">3</a>
+                    <a href="#" class="px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">...</a>
+                    <a href="#" class="px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">10</a>
+                    <a href="#" class="px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">
+                        <i data-feather="chevron-right" class="w-5 h-5"></i>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
+                            <i data-feather="repeat" class="text-white"></i>
+                        </div>
+                        <span class="text-2xl font-bold">Skill<span class="text-primary">Swap</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Exchange skills, grow together. Connect with skilled professionals worldwide.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="linkedin" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Browse Skills</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Categories</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Technology</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Languages</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Business</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Arts & Crafts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Health & Fitness</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Subscribe</h3>
+                    <p class="text-gray-400 mb-4">Get the latest updates and skill exchange opportunities</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-dark">
+                        <button class="bg-primary hover:bg-indigo-700 px-4 rounded-r-lg">
+                            <i data-feather="send" class="w-5 h-5 text-white"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 SkillSwap. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out'
+        });
+        feather.replace();
+        
+        // Filter button active state
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
