@@ -375,11 +375,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - React team for the amazing library
 - All contributors who help improve this project
 
-## 📧 Contact
-
-For questions or support, please open an issue on GitHub or contact:
-- Email: your.email@example.com
-- Twitter: [@yourhandle](https://twitter.com/yourhandle)
 
 ---
 
